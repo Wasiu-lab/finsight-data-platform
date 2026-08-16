@@ -1,12 +1,23 @@
-.PHONY: install lint test
+.PHONY: install lint format typecheck test check clean
 
 install:
-	pip install pre-commit ruff black mypy pytest
-	pre-commit install
+	uv sync
+	uv run pre-commit install
 
 lint:
-	ruff check .
-	black --check .
+	uv run ruff check .
+
+format:
+	uv run ruff format .
+
+typecheck:
+	uv run mypy
 
 test:
-	pytest ingestion/tests/ -v
+	uv run pytest
+
+check: lint typecheck test
+
+clean:
+	rm -rf .pytest_cache .mypy_cache .ruff_cache
+	find . -type d -name __pycache__ -exec rm -rf {} +
