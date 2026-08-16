@@ -217,17 +217,12 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-cat >> .gitignore << 'EOF'
 
-# Environment
-.env
-.env.local
-
-# Data files
-*.csv
-*.parquet
-*.json.gz
+# --- FinSight project-specific ---
 data/
+*.parquet
+*.csv
+*.json.gz
 
 # dbt
 target/
@@ -237,10 +232,3 @@ logs/
 # Airflow
 airflow/logs/
 airflow/plugins/
-
-# Python
-__pycache__/
-.mypy_cache/
-.pytest_cache/
-*.egg-info/
-EOF
